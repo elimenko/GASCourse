@@ -5,6 +5,9 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
+#include "GameplayTags/GCTags.h"
 
 void AGC_PlayerController::SetupInputComponent()
 {
@@ -26,7 +29,9 @@ void AGC_PlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ThisClass::Look);
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Move);
 	
-	EnhancedInputComponent->BindAction(PrimaryAction, ETriggerEvent::Started, this, &ThisClass::Primary);
+	EnhancedInputComponent->BindAction(PrimaryAction, ETriggerEvent::Triggered, this, &ThisClass::Primary);
+	EnhancedInputComponent->BindAction(SecondaryAction, ETriggerEvent::Started, this, &ThisClass::Secondary);
+	EnhancedInputComponent->BindAction(TertiaryAction, ETriggerEvent::Started, this, &ThisClass::Tertiary);
 }
 
 void AGC_PlayerController::Jump()
@@ -68,6 +73,23 @@ void AGC_PlayerController::Look(const FInputActionValue& Value)
 
 void AGC_PlayerController::Primary()
 {
-	// Log
-	UE_LOG(LogTemp, Warning, TEXT("Primary Action"));
+	ActivateAbility(GCTags::GCAbilities::Primary);
+}
+
+void AGC_PlayerController::Secondary()
+{
+	ActivateAbility(GCTags::GCAbilities::Secondary);
+}
+
+void AGC_PlayerController::Tertiary()
+{
+	ActivateAbility(GCTags::GCAbilities::Tertiary);
+}
+
+void AGC_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
+{
+	UAbilitySystemComponent* ASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn());
+	if (!IsValid(ASC)) return;
+
+	ASC->TryActivateAbilitiesByTag(AbilityTag.GetSingleTagContainer());
 }

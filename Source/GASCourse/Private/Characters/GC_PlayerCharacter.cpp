@@ -3,10 +3,12 @@
 
 #include "GASCourse/Public/Characters/GC_PlayerCharacter.h"
 
+#include "AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Player/GC_PlayerState.h"
 
 AGC_PlayerCharacter::AGC_PlayerCharacter()
 {
@@ -35,4 +37,31 @@ AGC_PlayerCharacter::AGC_PlayerCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
+}
+
+UAbilitySystemComponent* AGC_PlayerCharacter::GetAbilitySystemComponent() const
+{
+	AGC_PlayerState* GCPlayerState = Cast<AGC_PlayerState>(GetPlayerState());
+	if (!IsValid(GCPlayerState)) return nullptr;
+
+	return GCPlayerState->GetAbilitySystemComponent();
+}
+
+void AGC_PlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (!IsValid(GetAbilitySystemComponent()) || !HasAuthority()) return;
+
+	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
+	GiveStartupAbilities();
+}
+
+void AGC_PlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	if (!IsValid(GetAbilitySystemComponent())) return;
+
+	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
 }
