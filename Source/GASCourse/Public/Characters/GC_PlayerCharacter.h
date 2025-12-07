@@ -17,6 +17,7 @@ class GASCOURSE_API AGC_PlayerCharacter : public AGC_BaseCharacter
 public:
 	AGC_PlayerCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAttributeSet* GetAttributeSet() const override;
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 

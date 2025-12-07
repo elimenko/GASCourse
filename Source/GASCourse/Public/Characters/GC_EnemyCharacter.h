@@ -7,6 +7,7 @@
 #include "GC_EnemyCharacter.generated.h"
 
 class UAbilitySystemComponent;
+class UAttributeSet;
 
 UCLASS()
 class GASCOURSE_API AGC_EnemyCharacter : public AGC_BaseCharacter
@@ -16,6 +17,7 @@ class GASCOURSE_API AGC_EnemyCharacter : public AGC_BaseCharacter
 public:
 	AGC_EnemyCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAttributeSet* GetAttributeSet() const override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -23,5 +25,7 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere, Category = "GC|Ability System")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
-	
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
 };

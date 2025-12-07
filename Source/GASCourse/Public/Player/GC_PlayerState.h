@@ -9,6 +9,7 @@
 #include "GC_PlayerState.generated.h"
 
 class UAbilitySystemComponent;
+class UAttributeSet;
 
 UCLASS()
 class GASCOURSE_API AGC_PlayerState : public APlayerState, public IAbilitySystemInterface
@@ -19,8 +20,12 @@ public:
 	AGC_PlayerState();
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; }
+	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = "GC|Ability System")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
 };
