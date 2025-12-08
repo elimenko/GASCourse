@@ -40,4 +40,9 @@ void AGC_EnemyCharacter::BeginPlay()
 
 	GiveStartupAbilities();
 	InitializeAttributes();
+
+	UGC_AttributeSet* GC_AttributeSet = Cast<UGC_AttributeSet>(GetAttributeSet());
+	if (!IsValid(GC_AttributeSet)) return;
+	
+	GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(GC_AttributeSet->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
 }
