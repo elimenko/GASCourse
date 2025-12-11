@@ -21,6 +21,6 @@ public class GASCourse : ModuleRules
 			"UMG"
 		});
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] {  "AIModule" });
 	}
 }

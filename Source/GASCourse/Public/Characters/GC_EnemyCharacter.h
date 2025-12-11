@@ -19,8 +19,22 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual UAttributeSet* GetAttributeSet() const override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GC|AI")
+	float AcceptanceRadius{500.f};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GC|AI")
+	float MinAttackDelay{.1f};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GC|AI")
+	float MaxAttackDelay{.5f};
+
+	UFUNCTION(BlueprintImplementableEvent)
+	float GetTimelineLength();
+
 protected:
 	virtual void BeginPlay() override;
+
+	virtual void HandleDeath() override;
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = "GC|Ability System")

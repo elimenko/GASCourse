@@ -5,6 +5,12 @@
 #include "AbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
 
+namespace GCTags
+{
+	const FName Player = FName("Player");
+}
+
+
 AGC_BaseCharacter::AGC_BaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -51,11 +57,6 @@ void AGC_BaseCharacter::OnHealthChanged(const FOnAttributeChangeData& AttributeC
 void AGC_BaseCharacter::HandleDeath()
 {
 	bAlive = false;
-
-	if (IsValid(GEngine))
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("%s has died!"), *GetName()));
-	}
 }
 
 void AGC_BaseCharacter::HandleRespawn()
@@ -66,6 +67,7 @@ void AGC_BaseCharacter::HandleRespawn()
 void AGC_BaseCharacter::ResetAttributes()
 {
 	checkf(IsValid(ResetAttributesEffect), TEXT("ResetAttributesEffect not set."));
+	if (!IsValid(GetAbilitySystemComponent())) return;
 
 	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
 	FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(ResetAttributesEffect, 1.f, ContextHandle);

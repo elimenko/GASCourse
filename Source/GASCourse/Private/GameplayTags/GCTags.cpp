@@ -2,6 +2,10 @@
 
 namespace GCTags
 {
+	namespace SetByCaller
+	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Projectile, "GCTags.SetByCaller.Projectile", "Tag for Set By Caller magnitude for projectiles");
+	}
 	namespace GCAbilities
 	{
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(ActivateOnGiven, "GCTags.GCAbilities.ActivateOnGiven", "Tag for the Abilities that should activate immediately once given");
@@ -9,6 +13,11 @@ namespace GCTags
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Primary, "GCTags.GCAbilities.Primary", "Tag for the Primary Ability");
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Secondary, "GCTags.GCAbilities.Secondary", "Tag for the Secondary Ability");
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Tertiary, "GCTags.GCAbilities.Tertiary", "Tag for the Tertiary Ability");
+		
+		namespace Enemy
+		{
+			UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "GCTags.GCAbilities.Enemy.Attack", "Tag for the enemy attack");
+		}
 	}
 	namespace Events
 	{
@@ -16,6 +25,8 @@ namespace GCTags
 		namespace Enemy
 		{
 			UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "GCTags.Events.Enemy.HitReact", "Tag for the enemy hit react event");
+			UE_DEFINE_GAMEPLAY_TAG_COMMENT(EndAttack, "GCTags.Events.Enemy.EndAttack", "Tag for the enemy ending an attack");
+			UE_DEFINE_GAMEPLAY_TAG_COMMENT(MeleeTraceHit, "GCTags.Events.Enemy.MeleeTraceHit", "Tag for the enemy melee trace hit");
 		}
 	}
 }

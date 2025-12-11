@@ -7,6 +7,11 @@
 #include "GameFramework/Character.h"
 #include "GC_BaseCharacter.generated.h"
 
+namespace GCTags
+{
+	extern GASCOURSE_API const FName Player;
+}
+
 struct FOnAttributeChangeData;
 class UGameplayEffect;
 class UGameplayAbility;
@@ -35,6 +40,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "GC|Attributes")
 	void ResetAttributes();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void RotateToTarget(AActor* RotateToTarget);
 
 protected:
 	void GiveStartupAbilities();
