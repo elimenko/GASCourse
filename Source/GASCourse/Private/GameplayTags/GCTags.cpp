@@ -22,6 +22,11 @@ namespace GCTags
 	namespace Events
 	{
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(KillScored, "GCTags.Events.KillScored", "Tag for the KillScored Event");
+		namespace Player
+		{
+			UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "GCTags.Events.Player.HitReact", "Tag for the player hit react event");
+			UE_DEFINE_GAMEPLAY_TAG_COMMENT(Death, "GCTags.Events.Player.Death", "Tag for the player death");
+		}
 		namespace Enemy
 		{
 			UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "GCTags.Events.Enemy.HitReact", "Tag for the enemy hit react event");
