@@ -67,7 +67,7 @@ FClosestActorWithTagResult UGC_BlueprintLibrary::FindClosestActorWithTag(const U
 }
 
 void UGC_BlueprintLibrary::SendDamageEventToPlayer(AActor* Target, const TSubclassOf<UGameplayEffect>& DamageEffect,
-	const FGameplayEventData& Payload, const FGameplayTag& DataTag, float Damage)
+	FGameplayEventData& Payload, const FGameplayTag& DataTag, float Damage, UObject* OptionalParticleSystem)
 {
 	AGC_BaseCharacter* PlayerCharacter = Cast<AGC_BaseCharacter>(Target);
 	if (!IsValid(PlayerCharacter)) return;
@@ -79,6 +79,7 @@ void UGC_BlueprintLibrary::SendDamageEventToPlayer(AActor* Target, const TSubcla
 	const bool bLethal = AttributeSet->GetHealth() - Damage <= 0.f;
 	const FGameplayTag EventTag= bLethal ? GCTags::Events::Player::Death : GCTags::Events::Player::HitReact;
 
+	Payload.OptionalObject = OptionalParticleSystem;
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(PlayerCharacter, EventTag, Payload);
 
 	UAbilitySystemComponent* TargetASC = PlayerCharacter->GetAbilitySystemComponent();
