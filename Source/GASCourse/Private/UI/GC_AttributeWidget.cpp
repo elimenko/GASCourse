@@ -3,12 +3,12 @@
 
 #include "UI/GC_AttributeWidget.h"
 
-void UGC_AttributeWidget::OnAttributeChange(const TTuple<FGameplayAttribute, FGameplayAttribute>& Pair, UGC_AttributeSet* AttributeSet)
+void UGC_AttributeWidget::OnAttributeChange(const TTuple<FGameplayAttribute, FGameplayAttribute>& Pair, UGC_AttributeSet* AttributeSet, float OldValue)
 {
 	const float AttributeValue = Pair.Key.GetNumericValue(AttributeSet);
 	const float MaxAttributeValue = Pair.Value.GetNumericValue(AttributeSet);
 
-	BP_OnAttributeChange(AttributeValue, MaxAttributeValue);
+	BP_OnAttributeChange(AttributeValue, MaxAttributeValue, OldValue);
 }
 
 bool UGC_AttributeWidget::MatchesAttributes(const TTuple<FGameplayAttribute, FGameplayAttribute>& Pair) const
