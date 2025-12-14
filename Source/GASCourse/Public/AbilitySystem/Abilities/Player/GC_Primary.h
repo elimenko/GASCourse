@@ -16,21 +16,15 @@ class GASCOURSE_API UGC_Primary : public UGC_GameplayAbility
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "GC|Abilities")
-	TArray<AActor*> HitBoxOverlapTest();
-	
-	UFUNCTION(BlueprintCallable, Category = "GC|Abilities")
 	void SendHitReactEventToActors(const TArray<AActor*> ActorsHit);
 
-private:
-	void DrawHitboxOverlapDebugs(const TArray<FOverlapResult>& OverlapResults, const FVector& HitBoxLocation) const;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "GC|Abilities")
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "GC|Abilities")
 	float HitBoxRadius = 100.f;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "GC|Abilities")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "GC|Abilities")
 	float HitBoxForwardOffset = 200.f;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "GC|Abilities")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "GC|Abilities")
 	float HitBoxElevationOffset = 20.f;
-
 };

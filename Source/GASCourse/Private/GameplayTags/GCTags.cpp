@@ -2,6 +2,7 @@
 
 namespace GCTags
 {
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(None, "GCTags.None", "None");
 	namespace SetByCaller
 	{
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Projectile, "GCTags.SetByCaller.Projectile", "Tag for Set By Caller magnitude for projectiles");

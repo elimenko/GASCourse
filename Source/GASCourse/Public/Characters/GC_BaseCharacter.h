@@ -44,6 +44,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void RotateToTarget(AActor* RotateToTarget);
 
+	UPROPERTY(EditAnywhere, Category = "GC|AI")
+	float SearchRange{1000.f};
+
 protected:
 	void GiveStartupAbilities();
 	void InitializeAttributes() const;
